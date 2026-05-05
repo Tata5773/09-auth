@@ -11,8 +11,13 @@ import Modal from "@/components/Modal/Modal";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import { fetchNotes } from "@/lib/api";
+import type { NoteTag } from "@/types/note";
 
-export default function NotesClient() {
+type NotesClientProps = {
+  tag?: NoteTag;
+};
+
+export default function NotesClient({ tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState("");
@@ -28,8 +33,9 @@ export default function NotesClient() {
       page,
       search: search.trim(),
       perPage: 12,
+      tag,
     }),
-    [page, search],
+    [page, search, tag],
   );
 
   const { data, isLoading, isError, error, isFetching } = useQuery({
