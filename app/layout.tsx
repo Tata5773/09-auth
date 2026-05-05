@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Providers from "./providers";
 import "./globals.css";
-import Header from "@/components/Header/header";
-import Footer from "@/components/Footer/footer";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 
 export const metadata: Metadata = {
@@ -19,9 +19,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <Header />
-          <TanStackProvider>{children}</TanStackProvider>
-          <Footer />
+          <TanStackProvider>
+            <Header />
+            {children}
+            <Footer />
+          </TanStackProvider>
         </Providers>
       </body>
     </html>
