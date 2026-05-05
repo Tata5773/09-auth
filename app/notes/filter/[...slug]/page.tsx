@@ -10,14 +10,14 @@ import type { NoteTag } from "@/types/note";
 
 type Props = {
   params: Promise<{
-    slug?: string[];
+    slug: string[];
   }>;
 };
 
 export default async function FilterNotesPage({ params }: Props) {
   const { slug } = await params;
 
-  const selectedTag = slug?.[0];
+  const selectedTag = slug[0];
   const tag =
     selectedTag === "all" ? undefined : (selectedTag as NoteTag | undefined);
 

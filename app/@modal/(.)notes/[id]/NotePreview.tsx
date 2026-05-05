@@ -32,7 +32,7 @@ export default function NotePreview({ id }: NotePreviewProps) {
     <Modal onClose={handleClose}>
       {isLoading ? <p>Loading, please wait...</p> : null}
 
-      {error || !note ? <p>Something went wrong.</p> : null}
+      {!isLoading && (error || !note) ? <p>Something went wrong.</p> : null}
 
       {note ? (
         <div className={css.container}>

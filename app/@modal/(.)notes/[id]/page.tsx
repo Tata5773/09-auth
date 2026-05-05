@@ -13,7 +13,7 @@ type Props = {
   }>;
 };
 
-export default async function NotePreviewProps({ params }: Props) {
+export default async function NotePreviewPage({ params }: Props) {
   const { id } = await params;
   const queryClient = new QueryClient();
 
