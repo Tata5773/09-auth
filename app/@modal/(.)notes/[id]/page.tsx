@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import {
   HydrationBoundary,
   QueryClient,
@@ -12,6 +14,16 @@ type Props = {
     id: string;
   }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const note = await fetchNoteById(id);
+
+  return {
+    title: `${note.title} - NoteHub`,
+    description: note.content,
+  };
+}
 
 export default async function NotePreviewPage({ params }: Props) {
   const { id } = await params;

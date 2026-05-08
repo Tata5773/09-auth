@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import css from "./page.module.css";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "NoteHub",
+    description:
+      "A simple and efficient aplication for managing personal notes.",
+  };
+}
 
 export default function Home() {
   return (

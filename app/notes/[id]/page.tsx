@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import {
   HydrationBoundary,
   QueryClient,
@@ -7,8 +9,31 @@ import {
 import { fetchNoteById } from "@/lib/api";
 import NoteDetailsClient from "./NoteDetails.client";
 
+const OG_IMAGE = "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg";
+
 interface NoteDetailsProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: NoteDetailsProps): Promise<Metadata> {
+  const { id } = await params;
+  const note = await fetchNoteById(id);
+
+  const title = `${note.title} - NoteHub`;
+  const description = note.content;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `/app/notes/${id}`,
+      images: [OG_IMAGE],
+    },
+  };
 }
 
 export default async function NoteDetails({ params }: NoteDetailsProps) {

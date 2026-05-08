@@ -1,12 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
 import css from "./NoteHubApp.module.css";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import NoteList from "@/components/NoteList/NoteList";
-import Modal from "@/components/Modal/Modal";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import { fetchNotes } from "@/lib/noteService";
@@ -15,7 +14,6 @@ export default function NoteHubApp() {
   const [page, setPage] = useState(1);
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const updateSearch = useDebouncedCallback((value: string) => {
     setSearch(value);
@@ -49,13 +47,9 @@ export default function NoteHubApp() {
     <main className={css.app}>
       <header className={css.toolbar}>
         <SearchBox value={inputValue} onChange={handleSearch} />
-        <button
-          type="button"
-          className={css.button}
-          onClick={() => setIsModalOpen(true)}
-        >
+        <Link href="/notes/action/create" className={css.button}>
           Create note +
-        </button>
+        </Link>
       </header>
 
       {isLoading ? <p className={css.message}>Loading notes...</p> : null}
@@ -80,12 +74,6 @@ export default function NoteHubApp() {
 
       {isFetching && !isLoading ? (
         <p className={css.message}>Refreshing...</p>
-      ) : null}
-
-      {isModalOpen ? (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          <NoteForm onCancel={() => setIsModalOpen(false)} />
-        </Modal>
       ) : null}
     </main>
   );
