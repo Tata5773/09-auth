@@ -7,6 +7,7 @@ import Footer from "@/components/Footer/Footer";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 
 const OG_IMAGE = "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg";
+const SITE_URL = "https://notehub.com";
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],
@@ -21,7 +22,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NoteHub",
     description: "A Next.js note management app",
-    images: [OG_IMAGE],
+    url: SITE_URL,
+    images: [{ url: OG_IMAGE }],
   },
 };
 

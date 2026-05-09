@@ -4,8 +4,9 @@ import css from "./page.module.css";
 
 const title = "Create note - NoteHub";
 const description = "Create a new note in NoteHub.";
-const url = "/notes/action/create";
+const SITE_URL = "https://notehub.com";
 const OG_IMAGE = "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg";
+const url = `${SITE_URL}/notes/action/create`;
 
 export const metadata: Metadata = {
   title,
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     title,
     description,
     url,
-    images: [OG_IMAGE],
+    images: [{ url: OG_IMAGE }],
   },
 };
 

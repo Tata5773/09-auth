@@ -10,6 +10,7 @@ import { fetchNotes } from "@/lib/api";
 import type { NoteTag } from "@/types/note";
 
 const OG_IMAGE = "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg";
+const SITE_URL = "https://notehub.com";
 
 type Props = {
   params: Promise<{
@@ -37,8 +38,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `/app/notes/filter/${selectedTag}`,
-      images: [OG_IMAGE],
+      url: `${SITE_URL}/notes/filter/${selectedTag}`,
+      images: [{ url: OG_IMAGE }],
     },
   };
 }
