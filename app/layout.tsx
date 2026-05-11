@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import Providers from "./providers";
+
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const OG_IMAGE = "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg";
 const SITE_URL = "https://notehub.com";
@@ -29,22 +30,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={roboto.variable}>
-        <Providers>
-          <TanStackProvider>
+        <TanStackProvider>
+          <AuthProvider>
             <Header />
             {children}
-            {modal}
             <Footer />
-          </TanStackProvider>
-        </Providers>
+          </AuthProvider>
+        </TanStackProvider>
       </body>
     </html>
   );

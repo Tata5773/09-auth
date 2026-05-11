@@ -8,7 +8,7 @@ import css from "./NoteHubApp.module.css";
 import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
-import { fetchNotes } from "@/lib/noteService";
+import { fetchNotes } from "@/lib/api/clientApi";
 
 export default function NoteHubApp() {
   const [page, setPage] = useState(1);
