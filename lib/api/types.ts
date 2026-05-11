@@ -18,11 +18,6 @@ export interface CreateNotePayload {
   tag: Note["tag"];
 }
 
-export interface AuthCreadentials {
-  email: string;
-  password: string;
-}
-
 export interface UpdateUserPayload {
   username?: string;
   email?: string;

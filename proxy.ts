@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const privateRoutes = ["/profile", "/notes"];
-const authRoutes = ["/sing-in", "/sing-up"];
+const authRoutes = ["/sign-in", "/sign-up"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const accessToken = request.cookies.get("accessToken")?.value;
-  const refreshToken = request.cookies.get("refrechToken")?.value;
+  const refreshToken = request.cookies.get("refreshToken")?.value;
 
   const isAuthenticated = Boolean(accessToken || refreshToken);
 
@@ -17,11 +17,11 @@ export function proxy(request: NextRequest) {
 
   const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
 
-  if (!isAuthenticated && isAuthRoute) {
-    return NextResponse.redirect(new URL("/sing-in", request.url));
+  if (!isAuthenticated && isPrivateRoute) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
-  if (!isAuthenticated && isPrivateRoute) {
+  if (isAuthenticated && isAuthRoute) {
     return NextResponse.redirect(new URL("/profile", request.url));
   }
 
@@ -29,5 +29,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/profile/:path*", "/notes/:path*", "/sing-in", "/sing-up"],
+  matcher: ["/profile/:path*", "/notes/:path*", "/sign-in", "/sign-up"],
 };

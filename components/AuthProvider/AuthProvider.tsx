@@ -10,7 +10,7 @@ type AuthProviderProps = {
 };
 
 const privateRoutes = ["/profile", "/notes"];
-const authRoutes = ["/sing-in", "/sing-up"];
+const authRoutes = ["/sign-in", "/sign-up"];
 
 export default function AuthProvider({ children }: AuthProviderProps) {
   const pathname = usePathname();
@@ -56,7 +56,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
         if (isPrivteRoute) {
           await logout().catch(() => undefined);
-          router.replace("/sing-in");
+          router.replace("/sign-in");
         }
       } catch {
         if (ignore) return;
@@ -65,7 +65,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
         if (isPrivteRoute) {
           await logout().catch(() => undefined);
-          router.replace("/sing-in");
+          router.replace("/sign-in");
         }
       } finally {
         if (!ignore) {

@@ -17,6 +17,7 @@ export default function AuthNavigation() {
     await logout();
     clearIsAuthenticated();
     router.push("/sign-in");
+    router.refresh();
   };
 
   if (isAuthenticated) {
