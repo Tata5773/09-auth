@@ -1,13 +1,7 @@
 type PrivateLayoutProps = {
   children: React.ReactNode;
-  modal: React.ReactNode;
 };
 
-export default function PrivateLayout({ children, modal }: PrivateLayoutProps) {
-  return (
-    <>
-      {children}
-      {modal}
-    </>
-  );
+export default function PrivateLayout({ children }: PrivateLayoutProps) {
+  return <>{children}</>;
 }
