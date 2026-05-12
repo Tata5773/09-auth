@@ -50,7 +50,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
           setUser(user);
 
           if (isAuthRoute) {
-            router.replace("/profile");
+            router.replace("/");
           }
 
           return;

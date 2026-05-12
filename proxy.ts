@@ -49,7 +49,7 @@ export async function proxy(request: NextRequest) {
 
   if (isAuthenticated && isAuthRoute) {
     return applySetCookie(
-      NextResponse.redirect(new URL("/profile", request.url)),
+      NextResponse.redirect(new URL("/", request.url)),
       setCookie,
     );
   }
