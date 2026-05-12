@@ -46,12 +46,12 @@ export async function getMe(): Promise<User> {
   return response.data;
 }
 
-export async function checkSession(): Promise<User | null> {
-  const response: AxiosResponse<User | null> = await api.get("/auth/session", {
+export async function checkSession(
+  cookieHeader?: string,
+): Promise<AxiosResponse<{ success: boolean }>> {
+  return api.get("/auth/session", {
     headers: {
-      Cookie: await getCookieHeader(),
+      Cookie: cookieHeader ?? (await getCookieHeader()),
     },
   });
-
-  return response.data;
 }

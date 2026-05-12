@@ -30,6 +30,9 @@ export default function NotePreview({ id }: NotePreviewProps) {
 
   return (
     <Modal onClose={handleClose}>
+      <button type="button" className={css.closeButton} onClick={handleClose}>
+        Close
+      </button>
       {isLoading ? <p>Loading, please wait...</p> : null}
 
       {!isLoading && (error || !note) ? <p>Something went wrong.</p> : null}

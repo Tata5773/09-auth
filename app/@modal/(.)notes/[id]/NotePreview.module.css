@@ -39,3 +39,20 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.closeButton {
+  display: block;
+  margin-left: auto;
+  margin-bottom: 16px;
+  padding: 6px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #212529;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: #f1f3f5;
+}

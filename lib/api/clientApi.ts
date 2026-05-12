@@ -62,8 +62,9 @@ export async function logout(): Promise<void> {
   await api.post("/auth/logout");
 }
 
-export async function checkSession(): Promise<User | null> {
-  const response: AxiosResponse<User | null> = await api.get("/auth/session");
+export async function checkSession(): Promise<{ success: boolean }> {
+  const response: AxiosResponse<{ success: boolean }> =
+    await api.get("/auth/session");
 
   return response.data;
 }

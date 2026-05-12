@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { checkSession, logout } from "@/lib/api/clientApi";
+import { checkSession, getMe, logout } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
 
 type AuthProviderProps = {
@@ -29,7 +29,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     const verifySession = async () => {
       setIsLoading(true);
 
-      const isPrivteRoute = privateRoutes.some((route) =>
+      const isPrivateRoute = privateRoutes.some((route) =>
         pathname.startsWith(route),
       );
 
@@ -38,11 +38,15 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       );
 
       try {
-        const user = await checkSession();
+        const session = await checkSession();
 
         if (ignore) return;
 
-        if (user) {
+        if (session.success) {
+          const user = await getMe();
+
+          if (ignore) return;
+
           setUser(user);
 
           if (isAuthRoute) {
@@ -54,7 +58,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
         clearIsAuthenticated();
 
-        if (isPrivteRoute) {
+        if (isPrivateRoute) {
           await logout().catch(() => undefined);
           router.replace("/sign-in");
         }
@@ -63,7 +67,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
         clearIsAuthenticated();
 
-        if (isPrivteRoute) {
+        if (isPrivateRoute) {
           await logout().catch(() => undefined);
           router.replace("/sign-in");
         }
